@@ -14,6 +14,35 @@
   - http://localhost:8080/api/users
     - とりあえずこれが動くか
 
+## 以下ローカルで確認用
+DockerでMySQL立ち上げてね
+
+### Docker MySql
+```docker
+version: "3.9"
+services:
+  mysql-localmysql-local:
+    container_name: mysql-local
+    image: mysql
+    ports:
+      - "13306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: local
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      TZ: Asia/Tokyo
+
+volumes:
+  mysql-data:
+
+```
+
+### テーブル作成SQL
 ```sql
 CREATE TABLE `users` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
@@ -26,6 +55,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB;
 ```
 
+### 実行結果のイメージ
 ```json
 [
     {
