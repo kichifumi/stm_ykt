@@ -17,7 +17,7 @@
 ## ローカルで確認用
 DockerでMySQL立ち上げてね
 
-### Docker Compse MySql
+### Docker Compose MySql
 ```docker
 version: "3.9"
 services:
