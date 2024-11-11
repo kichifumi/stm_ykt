@@ -9,11 +9,11 @@ export class UserRepository extends BaseMySqlRepository {
   }
 
   // 単一ユーザー情報を取得
-  public async getUser(users: Users): Promise<Users> {
+  public async getUser(user_id: string): Promise<Users> {
     const query = `
       SELECT * FROM ${Tables.Users} WHERE id = ?
     `;
-    const params = [users.id];
+    const params = [user_id];
     const result = await this.executeQuery(query, params);
     return result as Users;
   }
@@ -31,7 +31,7 @@ export class UserRepository extends BaseMySqlRepository {
   public async insertUser(users: Users): Promise<number> {
     const query = `
       INSERT INTO ${Tables.Users}
-        (user_id, user_name, user_tntn)
+        (user_id, user_name, user_size)
       VALUES (?, ?, ?)
     `;
     const params = [users.id, users.name, users.size];
@@ -43,10 +43,10 @@ export class UserRepository extends BaseMySqlRepository {
   public async updateUser(users: Users): Promise<number> {
     const query = `
       UPDATE ${Tables.Users}
-      SET user_name = ?, user_tntn = ?
+      SET user_name = ?, user_size = ?
       WHERE user_id = ?
     `;
-    const params = [users.id, users.name, users.size];
+    const params = [users.name, users.size, users.id];
     const result = await this.executeQuery(query, params);
     return result.affectedRows;
   }
