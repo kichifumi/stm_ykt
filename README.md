@@ -14,7 +14,7 @@
   - http://localhost:8080/api/users
     - とりあえずこれが動くか
 
-## 以下ローカルで確認用
+## ローカルで確認用
 DockerでMySQL立ち上げてね
 
 ### Docker MySql
