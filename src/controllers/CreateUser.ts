@@ -1,7 +1,15 @@
 import { Request, Response } from 'express';
+import { UserRepository } from '../repositories/userRepository';
 
-export const createUser = (req: Request, res: Response) => {
+export const createUser = async (req: Request, res: Response) => {
+  const userRepository = new UserRepository(process.env);
+
+  try {
     const userData = req.body;
-    // res.status(201).json({ message: 'CreateUser', user: userData });
-    console.log(`Http function processed request for url "${"aaaa"}"`);
+    const result = await userRepository.insertUser(userData);
+    res.status(201).json(result);
+  } catch (error) {
+    console.error(`Error create users: ${error}`);
+    res.status(500).json({ message: 'Failed to fetch users' });
+  }
 };
